@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import { Mail, Phone, MapPin, Menu, X, ArrowRight } from "lucide-react";
 
 const SECTIONS = ["sj-about", "sj-experience", "sj-projects", "sj-education"];
 
+type RevealProps = {
+  children: ReactNode;
+  style?: CSSProperties;
+};
+
 function useReveal() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -22,7 +27,7 @@ function useReveal() {
   return ref;
 }
 
-function Reveal({ children, style }) {
+function Reveal({ children, style }: RevealProps) {
   const ref = useReveal();
   return (
     <div ref={ref} className="reveal" style={style}>
@@ -47,7 +52,9 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
-    const els = SECTIONS.map((id) => document.getElementById(id)).filter(Boolean);
+    const els = SECTIONS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el instanceof HTMLElement
+    );
     if (!els.length) return;
     const io = new IntersectionObserver(
       (entries) => {
@@ -61,7 +68,7 @@ export default function Portfolio() {
     return () => io.disconnect();
   }, []);
 
-  const navItem = (id, label) => (
+  const navItem = (id: string, label: string) => (
     <a
       href={`#${id}`}
       className={active === id ? "sj-nav-active" : ""}
