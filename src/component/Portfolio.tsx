@@ -3,6 +3,51 @@ import { Mail, Phone, MapPin, Menu, X, ArrowRight } from "lucide-react";
 
 const SECTIONS = ["sj-about", "sj-experience", "sj-projects", "sj-education"];
 
+type Skill = { name: string; level: number };
+
+const SKILL_GROUPS: { title: string; skills: Skill[] }[] = [
+  {
+    title: "Frontend",
+    skills: [
+      { name: "React.js", level: 90 },
+      { name: "React Native", level: 80 },
+      { name: "JavaScript", level: 92 },
+      { name: "TypeScript", level: 85 },
+      { name: "HTML / CSS", level: 90 },
+      { name: "Bootstrap", level: 88 },
+    ],
+  },
+  {
+    title: "Backend",
+    skills: [
+      { name: "Node.js", level: 85 },
+      { name: "Express", level: 82 },
+      { name: "Laravel", level: 90 },
+      { name: "PHP", level: 88 },
+      { name: "Java", level: 70 },
+      { name: "C++", level: 68 },
+    ],
+  },
+  {
+    title: "Database & Tools",
+    skills: [
+      { name: "MongoDB", level: 82 },
+      { name: "MySQL", level: 88 },
+      { name: "Git", level: 85 },
+      { name: "GitHub", level: 85 },
+    ],
+  },
+  {
+    title: "Core CS",
+    skills: [
+      { name: "DSA", level: 80 },
+      { name: "OOP", level: 85 },
+      { name: "REST APIs", level: 88 },
+      { name: "Auth Systems", level: 85 },
+    ],
+  },
+];
+
 type RevealProps = {
   children: ReactNode;
   style?: CSSProperties;
@@ -36,9 +81,29 @@ function Reveal({ children, style }: RevealProps) {
   );
 }
 
+function barStyle(level: number, delayMs: number): CSSProperties {
+  return { ["--target" as string]: `${level}%`, transitionDelay: `${delayMs}ms` } as CSSProperties;
+}
+
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("sj-about");
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const t = setTimeout(() => setLoading(false), prefersReduced ? 300 : 2000);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = loading ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [loading]);
 
   useEffect(() => {
     const id = "sj-font-link";
@@ -66,6 +131,18 @@ export default function Portfolio() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+      setScrollProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const navItem = (id: string, label: string) => (
@@ -119,6 +196,38 @@ export default function Portfolio() {
           outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px;
         }
 
+        .sj-scroll-progress{
+          position: fixed; top:0; left:0; height: 3px;
+          background: linear-gradient(90deg, var(--ink-2), var(--ink));
+          z-index: 100; transition: width .12s ease-out;
+        }
+
+        .sj-loader{
+          position: fixed; inset: 0; z-index: 200;
+          background: var(--ink); color: var(--mint-pale);
+          display:flex; align-items:center; justify-content:center; flex-direction: column;
+          transition: opacity .6s ease, visibility .6s ease, transform .6s ease;
+        }
+        .sj-loader.done{ opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-18px); }
+        .sj-loader-inner{ text-align: center; }
+        .sj-loader-badge{
+          width: 60px; height: 60px; border-radius: 50%; background: var(--mint); color: var(--ink);
+          font-family: var(--mono); font-weight: 700; font-size: 1.05rem;
+          display:flex; align-items:center; justify-content:center; margin: 0 auto 26px;
+          opacity: 0; animation: sj-loader-fade .5s ease forwards;
+        }
+        .sj-loader-line{ font-family: var(--mono); font-size: 0.85rem; color: rgba(235,249,248,0.6); opacity: 0; animation: sj-loader-fade .5s ease forwards; }
+        .sj-loader-line.l1{ animation-delay: .1s; }
+        .sj-loader-line.l2{ animation-delay: .5s; margin-top: 4px; }
+        .sj-loader-name{
+          font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem); font-weight: 500;
+          margin-top: 10px; opacity: 0; animation: sj-loader-fade .6s ease forwards; animation-delay: .9s;
+        }
+        @keyframes sj-loader-fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+        .sj-loader-bar{ width: 220px; height: 3px; background: rgba(235,249,248,0.15); border-radius: 999px; overflow: hidden; margin: 34px auto 0; }
+        .sj-loader-bar-fill{ height: 100%; width: 0%; background: var(--mint); border-radius: 999px; animation: sj-loader-bar 1.3s cubic-bezier(.16,1,.3,1) forwards; animation-delay: .2s; }
+        @keyframes sj-loader-bar{ to{ width: 100%; } }
+
         header.sj-header{
           position: sticky; top:0; z-index: 50;
           background: rgba(235,249,248,0.86);
@@ -160,19 +269,20 @@ export default function Portfolio() {
             radial-gradient(900px circle at 100% -10%, rgba(193,235,233,0.65), transparent 55%),
             radial-gradient(700px circle at -10% 110%, rgba(35,61,77,0.05), transparent 50%);
         }
-        .sj-eyebrow{ font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); display:flex; align-items:center; gap:10px; margin-bottom: 24px; }
+        .sj-eyebrow{ font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); display:flex; align-items:center; gap:10px; margin-bottom: 24px; animation: sj-fadeup .7s ease both; }
         .sj-eyebrow::before{ content:''; width:8px; height:8px; border-radius:50%; background: var(--ink-2); box-shadow: 0 0 0 4px rgba(35,61,77,0.12); }
-        .sj-hero h1{ font-family: var(--serif); font-weight: 500; font-size: clamp(2.7rem, 5vw, 4.6rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 22px; color: var(--ink); -webkit-text-fill-color: var(--ink); opacity: 1; }
+        .sj-hero h1{ font-family: var(--serif); font-weight: 500; font-size: clamp(2.7rem, 5vw, 4.6rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 22px; color: var(--ink); -webkit-text-fill-color: var(--ink); opacity: 1; animation: sj-fadeup .7s ease .08s both; }
         .sj-hero h1 em{ font-style: italic; color: var(--ink-2); -webkit-text-fill-color: var(--ink-2); font-weight: 500; }
-        .sj-hero p.lead{ font-size: 1.1rem; color: var(--ink-2); max-width: 46ch; margin: 0 0 36px; }
-        .sj-hero-cta{ display:flex; gap:16px; flex-wrap: wrap; margin-bottom: 44px; }
+        .sj-hero p.lead{ font-size: 1.1rem; color: var(--ink-2); max-width: 46ch; margin: 0 0 36px; animation: sj-fadeup .7s ease .16s both; }
+        .sj-hero-cta{ display:flex; gap:16px; flex-wrap: wrap; margin-bottom: 44px; animation: sj-fadeup .7s ease .24s both; }
+        @keyframes sj-fadeup{ from{ opacity:0; transform: translateY(16px); } to{ opacity:1; transform: translateY(0); } }
         .sj-btn{ font-family: var(--sans); font-weight: 600; font-size: 0.92rem; padding: 14px 28px; border-radius: 9px; display:inline-flex; align-items:center; gap:8px; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
         .sj-btn-solid{ background: var(--ink); color: var(--mint-pale); }
         .sj-btn-solid:hover{ transform: translateY(-2px); box-shadow: var(--shadow); }
         .sj-btn-ghost{ border: 1px solid var(--line-strong); color: var(--ink); }
         .sj-btn-ghost:hover{ background: var(--mint); border-color: var(--ink); }
 
-        .sj-terminal{ font-family: var(--mono); font-size: 0.82rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); border-radius: 14px; padding: 22px 24px; max-width: 460px; box-shadow: var(--shadow); }
+        .sj-terminal{ font-family: var(--mono); font-size: 0.82rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); border-radius: 14px; padding: 22px 24px; max-width: 460px; box-shadow: var(--shadow); animation: sj-fadeup .7s ease .32s both; }
         .sj-terminal .tbar{ display:flex; gap:6px; margin-bottom: 16px; }
         .sj-terminal .tbar span{ width:9px; height:9px; border-radius:50%; background: var(--line-strong); display:inline-block; }
         .sj-terminal .prompt{ color: var(--ink-2); }
@@ -187,15 +297,18 @@ export default function Portfolio() {
           content:''; position:absolute; width: 380px; height: 380px; border-radius: 50%;
           background: radial-gradient(circle, rgba(193,235,233,0.9) 0%, rgba(193,235,233,0) 70%);
           filter: blur(6px); z-index: 0;
+          animation: sj-pulse 5s ease-in-out infinite;
         }
-        .sj-plate{ position:absolute; width: 300px; border-radius: 14px; border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:space-between; padding: 17px 22px; font-family: var(--mono); font-size: 0.78rem; box-shadow: var(--shadow); opacity:0; transform: translateY(24px); animation: sj-rise .7s ease forwards; }
+        @keyframes sj-pulse{ 0%,100%{ transform: scale(1); opacity: 1; } 50%{ transform: scale(1.08); opacity: 0.85; } }
+        .sj-plate{ position:absolute; width: 300px; border-radius: 14px; border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:space-between; padding: 17px 22px; font-family: var(--mono); font-size: 0.78rem; box-shadow: var(--shadow); opacity:0; transform: translateY(24px); }
         .sj-plate .tag{ color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; font-size:0.68rem; }
         .sj-plate .name{ font-weight: 600; margin-top: 4px; }
-        .sj-plate-1{ background: var(--paper); top: 24px; z-index:3; animation-delay: .15s; }
-        .sj-plate-2{ background: var(--mint); top: 158px; left: 30px; z-index:2; animation-delay: .35s; }
-        .sj-plate-3{ background: var(--ink); color: var(--mint-pale); top: 292px; z-index:1; animation-delay: .55s; }
+        .sj-plate-1{ background: var(--paper); top: 24px; z-index:3; animation: sj-rise .7s ease .15s forwards, sj-float 4.5s ease-in-out 1s infinite; }
+        .sj-plate-2{ background: var(--mint); top: 158px; left: 30px; z-index:2; animation: sj-rise .7s ease .35s forwards, sj-float 4.5s ease-in-out 1.2s infinite; }
+        .sj-plate-3{ background: var(--ink); color: var(--mint-pale); top: 292px; z-index:1; animation: sj-rise .7s ease .55s forwards, sj-float 4.5s ease-in-out 1.4s infinite; }
         .sj-plate-3 .tag{ color: rgba(235,249,248,0.6); }
         @keyframes sj-rise{ to{ opacity:1; transform: translateY(0); } }
+        @keyframes sj-float{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-8px); } }
 
         .sj-root section{ padding: 100px 0; }
         .reveal{ opacity: 0.5; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
@@ -222,9 +335,21 @@ export default function Portfolio() {
         .sj-skill-groups{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 12px; }
         .sj-skill-card{ padding: 24px 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--mint-pale); transition: border-color .2s ease, transform .2s ease; }
         .sj-skill-card:hover{ border-color: var(--line-strong); transform: translateY(-3px); }
-        .sj-skill-card h3{ font-family: var(--sans); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); margin: 0 0 16px; font-weight: 600; }
-        .sj-chip-row{ display:flex; flex-wrap: wrap; gap: 9px; }
-        .sj-chip{ font-family: var(--mono); font-size: 0.78rem; padding: 7px 13px; border-radius: 999px; background: var(--mint); border: 1px solid rgba(35,61,77,0.18); color: var(--ink); }
+        .sj-skill-card h3{ font-family: var(--sans); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); margin: 0 0 18px; font-weight: 600; }
+
+        .sj-bar-list{ display:flex; flex-direction:column; gap: 14px; }
+        .sj-bar-row{ opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+        .reveal.in .sj-bar-row{ opacity: 1; transform: translateY(0); }
+        .sj-bar-label{ display:flex; justify-content:space-between; font-family: var(--mono); font-size: 0.74rem; margin-bottom: 7px; }
+        .sj-bar-label span:first-child{ color: var(--ink); font-weight: 500; }
+        .sj-bar-label span:last-child{ color: var(--ink-3); }
+        .sj-bar-track{ height: 6px; border-radius: 999px; background: rgba(35,61,77,0.1); overflow: hidden; }
+        .sj-bar-fill{
+          height: 100%; width: 0; border-radius: 999px;
+          background: linear-gradient(90deg, var(--ink-2), var(--ink));
+          transition: width 1.1s cubic-bezier(.16,1,.3,1);
+        }
+        .reveal.in .sj-bar-fill{ width: var(--target); }
 
         #sj-experience{
           background:
@@ -234,10 +359,15 @@ export default function Portfolio() {
         }
         .sj-timeline{ position: relative; margin-top: 12px; }
         .sj-timeline::before{ content:''; position:absolute; left: 7px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--line-strong), var(--line)); }
-        .sj-tl-item{ position: relative; padding: 0 0 52px 46px; }
+        .sj-tl-item{ position: relative; padding: 0 0 52px 46px; opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal.in .sj-tl-item{ opacity: 1; transform: translateY(0); }
+        .sj-tl-item:nth-child(1){ transition-delay: .05s; }
+        .sj-tl-item:nth-child(2){ transition-delay: .18s; }
+        .sj-tl-item:nth-child(3){ transition-delay: .31s; }
         .sj-tl-item:last-child{ padding-bottom: 0; }
         .sj-tl-dot{ position:absolute; left:0; top: 6px; width: 15px; height: 15px; border-radius:50%; background: var(--paper); border: 2px solid var(--ink); }
-        .sj-tl-item.current .sj-tl-dot{ background: var(--ink); box-shadow: 0 0 0 5px rgba(35,61,77,0.14); }
+        .sj-tl-item.current .sj-tl-dot{ background: var(--ink); box-shadow: 0 0 0 5px rgba(35,61,77,0.14); animation: sj-dotpulse 2.2s ease-in-out infinite; }
+        @keyframes sj-dotpulse{ 0%,100%{ box-shadow: 0 0 0 5px rgba(35,61,77,0.14); } 50%{ box-shadow: 0 0 0 8px rgba(35,61,77,0.08); } }
         .sj-tl-date{ font-family: var(--mono); font-size: 0.78rem; color: var(--ink-2); margin-bottom: 8px; display:block; }
         .sj-tl-head{ display:flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 12px; }
         .sj-tl-role{ font-family: var(--serif); font-size: 1.35rem; font-weight: 500; }
@@ -260,8 +390,8 @@ export default function Portfolio() {
         .sj-proj-card h3{ font-family: var(--serif); font-size: 1.25rem; font-weight: 500; margin: 0 0 14px; }
         .sj-proj-card ul{ margin: 0 0 20px; padding-left: 18px; color: var(--ink-2); font-size: 0.92rem; flex:1; }
         .sj-proj-card li{ margin-bottom: 7px; }
-        .sj-proj-link{ font-family: var(--mono); font-size: 0.8rem; font-weight: 500; border-top: 1px solid var(--line); padding-top: 16px; display:flex; align-items:center; gap:6px; }
-        .sj-proj-link:hover{ color: var(--ink-2); }
+        .sj-proj-link{ font-family: var(--mono); font-size: 0.8rem; font-weight: 500; border-top: 1px solid var(--line); padding-top: 16px; display:flex; align-items:center; gap:6px; transition: gap .2s ease, color .2s ease; }
+        .sj-proj-link:hover{ color: var(--ink-2); gap: 10px; }
 
         #sj-education{
           background:
@@ -295,8 +425,8 @@ export default function Portfolio() {
         .sj-contact-box h2{ font-family: var(--serif); font-weight: 500; font-size: clamp(2.1rem, 4vw, 3.1rem); margin: 0 0 22px; letter-spacing: -0.01em; position: relative; }
         .sj-contact-box p{ color: rgba(235,249,248,0.75); max-width: 46ch; margin: 0 auto 36px; position: relative; }
         .sj-contact-links{ display:flex; justify-content:center; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; position: relative; }
-        .sj-contact-links a{ font-family: var(--mono); font-size: 0.85rem; padding: 13px 24px; border-radius: 999px; border: 1px solid rgba(235,249,248,0.3); display:inline-flex; align-items:center; gap:8px; transition: background .2s ease, border-color .2s ease; }
-        .sj-contact-links a:hover{ background: rgba(235,249,248,0.12); border-color: var(--mint); }
+        .sj-contact-links a{ font-family: var(--mono); font-size: 0.85rem; padding: 13px 24px; border-radius: 999px; border: 1px solid rgba(235,249,248,0.3); display:inline-flex; align-items:center; gap:8px; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+        .sj-contact-links a:hover{ background: rgba(235,249,248,0.12); border-color: var(--mint); transform: translateY(-2px); }
         .sj-foot-meta{ display:flex; justify-content: space-between; padding-top: 44px; font-size: 0.82rem; color: var(--ink-2); flex-wrap: wrap; gap: 12px; position: relative; }
 
         @media (max-width: 880px){
@@ -313,7 +443,22 @@ export default function Portfolio() {
           .sj-wrap{ padding: 0 22px; }
           .sj-root section{ padding: 72px 0; }
         }
+        @media (prefers-reduced-motion: reduce){
+          .sj-root *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+        }
       `}</style>
+
+      <div className={`sj-loader${loading ? "" : " done"}`} aria-hidden={!loading}>
+        <div className="sj-loader-inner">
+          <div className="sj-loader-badge">SJ</div>
+          <div className="sj-loader-line l1">&gt; booting sakshi.dev</div>
+          <div className="sj-loader-line l2">&gt; whoami</div>
+          <div className="sj-loader-name">Sakshi Jain<span className="sj-cursor"></span></div>
+          <div className="sj-loader-bar"><div className="sj-loader-bar-fill"></div></div>
+        </div>
+      </div>
+
+      <div className="sj-scroll-progress" style={{ width: `${scrollProgress}%` }} />
 
       <header className="sj-header">
         <nav className="sj-nav sj-wrap">
@@ -393,36 +538,24 @@ export default function Portfolio() {
               <div style={{ marginTop: 68 }}>
                 <div className="sj-kicker">Skills</div>
                 <div className="sj-skill-groups">
-                  <div className="sj-skill-card">
-                    <h3>Frontend</h3>
-                    <div className="sj-chip-row">
-                      <span className="sj-chip">React.js</span><span className="sj-chip">React Native</span>
-                      <span className="sj-chip">JavaScript</span><span className="sj-chip">TypeScript</span>
-                      <span className="sj-chip">HTML/CSS</span><span className="sj-chip">Bootstrap</span>
+                  {SKILL_GROUPS.map((group) => (
+                    <div className="sj-skill-card" key={group.title}>
+                      <h3>{group.title}</h3>
+                      <div className="sj-bar-list">
+                        {group.skills.map((s, i) => (
+                          <div className="sj-bar-row" key={s.name} style={{ transitionDelay: `${i * 90}ms` }}>
+                            <div className="sj-bar-label">
+                              <span>{s.name}</span>
+                              <span>{s.level}%</span>
+                            </div>
+                            <div className="sj-bar-track">
+                              <div className="sj-bar-fill" style={barStyle(s.level, i * 90)} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div className="sj-skill-card">
-                    <h3>Backend</h3>
-                    <div className="sj-chip-row">
-                      <span className="sj-chip">Node.js</span><span className="sj-chip">Express</span>
-                      <span className="sj-chip">Laravel</span><span className="sj-chip">PHP</span>
-                      <span className="sj-chip">Java</span><span className="sj-chip">C++</span>
-                    </div>
-                  </div>
-                  <div className="sj-skill-card">
-                    <h3>Database &amp; Tools</h3>
-                    <div className="sj-chip-row">
-                      <span className="sj-chip">MongoDB</span><span className="sj-chip">MySQL</span>
-                      <span className="sj-chip">Git</span><span className="sj-chip">GitHub</span>
-                    </div>
-                  </div>
-                  <div className="sj-skill-card">
-                    <h3>Core CS</h3>
-                    <div className="sj-chip-row">
-                      <span className="sj-chip">DSA</span><span className="sj-chip">OOP</span>
-                      <span className="sj-chip">REST APIs</span><span className="sj-chip">Auth Systems</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
