@@ -118,12 +118,7 @@ export default function Projects() {
                   )}
 
                   <div className="sj-proj-badges-row">
-                    {proj.liveUrl && (
-                      <span className="sj-live-badge">
-                        <span className="sj-pulse-dot" />
-                        Live Site
-                      </span>
-                    )}
+
                     {proj.featured && (
                       <span className="sj-featured-badge">
                         <Sparkles size={11} />
@@ -136,7 +131,7 @@ export default function Projects() {
                 {/* Card Body */}
                 <div className="sj-proj-card-body">
                   <div className="sj-proj-card-top">
-                    <span className="sj-proj-stack-label">{proj.stack}</span>
+                    {/* <span className="sj-proj-stack-label">{proj.stack}</span> */}
                     <h3 className="sj-proj-card-title">{proj.title}</h3>
                     <p className="sj-proj-summary-text">{proj.summary}</p>
                   </div>

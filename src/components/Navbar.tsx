@@ -69,18 +69,6 @@ export default function Navbar({ activeSection }: NavbarProps) {
 
           {/* Right Action Buttons */}
           <div className="sj-nav-actions">
-            {PERSONAL_INFO.resumeUrl && (
-              <a
-                href={PERSONAL_INFO.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sj-nav-btn sj-nav-btn-resume"
-                title="Download / View Resume"
-              >
-                <FileText size={14} />
-                <span>Resume</span>
-              </a>
-            )}
 
             <a
               className="sj-nav-btn sj-nav-btn-contact"

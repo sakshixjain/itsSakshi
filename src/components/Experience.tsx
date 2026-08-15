@@ -44,11 +44,11 @@ export default function Experience() {
 
                 <div className="sj-tl-head">
                   <div className="sj-tl-role-box">
-                    <h3 className="sj-tl-role">
-                      <Briefcase size={18} className="sj-role-icon" />
-                      {exp.role}
-                    </h3>
-                    <div className="sj-tl-company">{exp.company}</div>
+                    <h3 className="sj-tl-role">{exp.role}</h3>
+                    <div className="sj-tl-company">
+                      <Briefcase size={14} className="sj-role-icon" />
+                      <span>{exp.company}</span>
+                    </div>
                   </div>
                   {exp.isCurrent && (
                     <span className="sj-current-pill">

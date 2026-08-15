@@ -39,12 +39,16 @@ export interface EducationItem {
   institution: string;
   period: string;
   score: string;
+  badge?: string;
+  highlights?: string[];
 }
 
 export interface CertificationItem {
   title: string;
   issuer: string;
+  badge?: string;
   highlight?: boolean;
+  link?: string;
 }
 
 export interface PersonalInfo {

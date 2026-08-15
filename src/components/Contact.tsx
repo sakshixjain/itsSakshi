@@ -1,46 +1,7 @@
 import { useState, useRef } from "react";
 import { useReveal } from "../hooks/useReveal";
 import { PERSONAL_INFO } from "../data/portfolioData";
-import { Mail, MapPin, Copy, Check, ArrowUpRight, Sparkles, Send, FileText } from "lucide-react";
-
-function GithubIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-      <path d="M9 18c-4.51 2-5-2-7-2" />
-    </svg>
-  );
-}
-
-function LinkedinIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
+import { Mail, Copy, Check, ArrowUpRight, Sparkles, FileText, MapPin } from "lucide-react";
 
 export default function Contact() {
   const { ref } = useReveal({ threshold: 0.1 });
@@ -71,7 +32,7 @@ export default function Contact() {
     }> = [];
 
     const colors = ["#10B981", "#38BDF8", "#818CF8", "#F8FAFC", "#F59E0B"];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 36; i++) {
       particles.push({
         x: canvas.width / 2,
         y: canvas.height / 2,
@@ -85,7 +46,6 @@ export default function Contact() {
       });
     }
 
-    let frame = 0;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       let alive = false;
@@ -102,18 +62,16 @@ export default function Contact() {
           ctx.save();
           ctx.translate(p.x, p.y);
           ctx.rotate((p.rotation * Math.PI) / 180);
-          ctx.globalAlpha = Math.max(p.alpha, 0);
           ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, p.alpha);
           ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
           ctx.restore();
         }
       });
 
-      frame++;
-      if (alive && frame < 70) {
+      if (alive) {
         requestAnimationFrame(animate);
       } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         setConfettiActive(false);
       }
     };
@@ -133,7 +91,7 @@ export default function Contact() {
   };
 
   return (
-    <footer id="sj-contact" className="sj-footer">
+    <section id="sj-contact" className="sj-section sj-contact-section">
       <div ref={ref} className="sj-wrap reveal">
         <div className="sj-contact-box">
           <canvas
@@ -150,16 +108,16 @@ export default function Contact() {
             </div>
 
             <h2 className="sj-contact-title">
-              Building something high-impact? <br />
+              Have an opportunity in mind? <br />
               <em>Let's start a conversation.</em>
             </h2>
 
             <p className="sj-contact-desc">
-              Whether you have an open full-time engineering role, an enterprise project, or simply want to connect — my inbox is always open.
+              I am actively seeking full-time Full Stack Software Engineering roles where I can contribute to high-impact products. Let's talk!
             </p>
 
             <div className="sj-contact-actions">
-              {/* Email Pill with Copy & Mailto */}
+              {/* Primary Email Pill with Copy & Direct Mail */}
               <div className="sj-contact-card">
                 <a
                   href={PERSONAL_INFO.socials.email}
@@ -197,57 +155,27 @@ export default function Contact() {
                     className="sj-contact-action-btn"
                   >
                     <FileText size={16} />
-                    <span>Download CV / Resume</span>
+                    <span>Download Resume</span>
                     <ArrowUpRight size={14} className="sj-arrow-icon" />
                   </a>
                 </div>
               )}
             </div>
 
-            {/* Social Links */}
-            <div className="sj-social-links">
-              <a
-                href={PERSONAL_INFO.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sj-social-pill"
-                aria-label="GitHub Profile"
-              >
-                <GithubIcon size={16} />
-                <span>GitHub</span>
-              </a>
-              <a
-                href={PERSONAL_INFO.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sj-social-pill"
-                aria-label="LinkedIn Profile"
-              >
-                <LinkedinIcon size={16} />
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href={`mailto:${PERSONAL_INFO.email}?subject=Collaboration%20Inquiry`}
-                className="sj-social-pill highlight"
-              >
-                <Send size={15} />
-                <span>Send Quick Note</span>
-              </a>
-            </div>
-
-            {/* Footer Bottom Meta */}
-            <div className="sj-foot-meta">
-              <div className="sj-location-info">
-                <MapPin size={14} />
-                <span>{PERSONAL_INFO.location}</span>
+            {/* Quick Status / Availability Strip */}
+            <div className="sj-contact-availability-strip">
+              <div className="sj-avail-pill">
+                <span className="sj-pulse-dot" />
+                <span>Available for Immediate Joining</span>
               </div>
-              <div className="sj-copyright">
-                <span>© {new Date().getFullYear()} {PERSONAL_INFO.name}. All rights reserved.</span>
+              <div className="sj-avail-loc">
+                <MapPin size={13} />
+                <span>{PERSONAL_INFO.location} · Remote / Onsite</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </footer>
+    </section>
   );
 }
