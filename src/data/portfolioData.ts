@@ -183,6 +183,18 @@ export const PROJECTS: ProjectItem[] = [
     featured: true,
   },
   {
+    id: "solo-trip",
+    title: "Solo Trip — Travel & Exploration Platform",
+    category: "fullstack",
+    stack: "MERN Stack · MySQL · Express.js",
+    summary: "Full-stack solo travel and trip planning platform built with React, Node.js, Express, and MySQL. Features curated travel destinations, custom itinerary management, secure authentication, and robust relational database architecture.",
+    image: "/images/project-solotrip.png",
+    liveUrl: "https://solo-trip.netlify.app/",
+    githubUrl: "https://github.com/sakshixjain",
+    tags: ["MERN Stack", "MySQL", "React.js", "Node.js", "Express.js", "Live Site"],
+    featured: true,
+  },
+  {
     id: "chat-app",
     title: "Chat Application",
     category: "realtime",

@@ -5,41 +5,40 @@ import {
   Cpu,
   CheckCircle2,
   FileText,
-  User,
-  Copy,
-  Check,
   ArrowUpRight,
+  ArrowRight,
+  Zap,
+  Layers,
+  Database,
 } from "lucide-react";
 import { PERSONAL_INFO } from "../data/portfolioData";
 
 const ROLES = [
-  "builds full-stack products, end to end.",
-  "engineers MERN & Laravel web systems.",
-  "solves complex DSA problems (390+ solved).",
-  "crafts responsive, accessible interfaces.",
+  "MERN Stack & Laravel Applications",
+  "Scalable REST APIs & Web Architecture",
+  "Algorithmic Problem Solving (390+ DSA)",
+  "Database Systems (MySQL & MongoDB)",
 ];
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   // 3D Card Tilt state for Hero graphic
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const graphicRef = useRef<HTMLDivElement | null>(null);
 
-  // Typewriter effect for rotating roles
+  // Continuous Typewriter effect for rotating roles
   useEffect(() => {
     const currentFullText = ROLES[roleIndex];
-    const typingSpeed = isDeleting ? 30 : 65;
+    const typingSpeed = isDeleting ? 22 : 45;
 
     const timer = setTimeout(() => {
       if (!isDeleting) {
         setDisplayText(currentFullText.slice(0, displayText.length + 1));
         if (displayText.length + 1 === currentFullText.length) {
-          setTimeout(() => setIsDeleting(true), 2200);
+          setTimeout(() => setIsDeleting(true), 400);
         }
       } else {
         setDisplayText(currentFullText.slice(0, displayText.length - 1));
@@ -52,19 +51,6 @@ export default function Hero() {
 
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, roleIndex]);
-
-  const handleCopyCode = () => {
-    const codeSnippet = `const developer = {
-  name: "${PERSONAL_INFO.name}",
-  role: "Full Stack Developer",
-  stack: ["MERN", "Laravel", "TypeScript", "MySQL", "MongoDB"],
-  dsa: "390+ Solved (LeetCode & GfG)",
-  email: "${PERSONAL_INFO.email}"
-};`;
-    navigator.clipboard.writeText(codeSnippet);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!graphicRef.current) return;
@@ -81,125 +67,70 @@ export default function Hero() {
   return (
     <section className="sj-hero sj-wrap" id="sj-hero">
       <div className="sj-hero-content">
-        {/* Unified Status Pill with Avatar */}
+        {/* Availability Badge */}
         <div className="sj-hero-status-pill">
-          <div className="sj-status-avatar-circle">
-            {!imageError && PERSONAL_INFO.avatarUrl ? (
-              <img
-                src={PERSONAL_INFO.avatarUrl}
-                alt={PERSONAL_INFO.name}
-                className="sj-status-avatar-img"
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <User size={13} />
-            )}
-            <span className="sj-status-dot-pulse" />
-          </div>
+          <span className="sj-pulse-dot" />
           <span className="sj-status-badge-text">Available for full-time roles</span>
           <span className="sj-status-sparkle">✦</span>
         </div>
 
-        <h1 className="sj-hero-title">
-          <span className="sj-name-line">{PERSONAL_INFO.name}</span>
-          <span className="sj-sub-line">
-            <em>{displayText}</em>
+        {/* Main Title & Dynamic Role Subtitle */}
+        <div className="sj-hero-heading-group">
+          <div className="sj-hero-kicker-tag">Full Stack Developer</div>
+          <h1 className="sj-hero-title">
+            <span className="sj-name-line">{PERSONAL_INFO.name}</span>
+          </h1>
+
+          <div className="sj-hero-typewriter-line">
+            <span className="sj-typewriter-label">Building</span>{" "}
+            <span className="sj-typewriter-text">{displayText}</span>
             <span className="sj-cursor" />
-          </span>
-        </h1>
-
-        {/* Sleek Modern Interactive Code Terminal */}
-        <div className="sj-code-console">
-          <div className="sj-console-head">
-            <div className="sj-tbar">
-              <span className="dot red" />
-              <span className="dot yellow" />
-              <span className="dot green" />
-            </div>
-
-            <div className="sj-console-tab">
-              <Code2 size={13} className="sj-ts-icon" />
-              <span>developer.config.ts</span>
-            </div>
-
-            <div className="sj-console-actions">
-              {PERSONAL_INFO.resumeUrl && (
-                <a
-                  href={PERSONAL_INFO.resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sj-console-resume-btn"
-                  title="View / Download Resume"
-                >
-                  <FileText size={12} />
-                  <span>Resume</span>
-                  <ArrowUpRight size={11} />
-                </a>
-              )}
-
-              <button
-                type="button"
-                className="sj-console-copy-btn"
-                onClick={handleCopyCode}
-                title="Copy snippet"
-                aria-label="Copy code snippet"
-              >
-                {copied ? <Check size={12} className="copied" /> : <Copy size={12} />}
-                <span>{copied ? "Copied" : "Copy"}</span>
-              </button>
-            </div>
           </div>
+        </div>
 
-          <div className="sj-console-body">
-            <div className="sj-code-line">
-              <span className="sj-line-num">1</span>
-              <span className="sj-code-keyword">const</span>{" "}
-              <span className="sj-code-var">developer</span> = &#123;
-            </div>
-            <div className="sj-code-line sj-indent">
-              <span className="sj-line-num">2</span>
-              <span className="sj-code-prop">name:</span>{" "}
-              <span className="sj-code-str">"Sakshi Jain",</span>
-            </div>
-            <div className="sj-code-line sj-indent">
-              <span className="sj-line-num">3</span>
-              <span className="sj-code-prop">role:</span>{" "}
-              <span className="sj-code-str">"Full Stack Dev",</span>
-            </div>
-            <div className="sj-code-line sj-indent">
-              <span className="sj-line-num">4</span>
-              <span className="sj-code-prop">stack:</span> [
-              <span className="sj-code-str">"MERN",</span>{" "}
-              <span className="sj-code-str">"Laravel",</span>{" "}
-              <span className="sj-code-str">"MySQL"</span>],
-            </div>
-            <div className="sj-code-line sj-indent">
-              <span className="sj-line-num">5</span>
-              <span className="sj-code-prop">dsaSolved:</span>{" "}
-              <span className="sj-code-highlight">"390+ Problems",</span>
-            </div>
-            <div className="sj-code-line sj-indent">
-              <span className="sj-line-num">6</span>
-              <span className="sj-code-prop">openForRoles:</span>{" "}
-              <span className="sj-code-bool">true</span>
-            </div>
-            <div className="sj-code-line">
-              <span className="sj-line-num">7</span>
-              &#125;;
-            </div>
+        {/* Concise Hero Bio */}
+        <p className="sj-hero-bio">
+          Full-Stack Software Developer building scalable web applications, robust REST APIs, and database-driven solutions with <strong>MERN Stack</strong>, <strong>Laravel</strong>, and <strong>MySQL</strong>.
+        </p>
+
+        {/* Primary Call to Action Buttons (Explore Projects & Resume only) */}
+        <div className="sj-hero-cta">
+          <a href="#sj-projects" className="sj-btn sj-btn-primary">
+            <Sparkles size={16} />
+            <span>Explore Projects</span>
+            <ArrowRight size={16} />
+          </a>
+
+          {PERSONAL_INFO.resumeUrl && (
+            <a
+              href={PERSONAL_INFO.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sj-btn sj-btn-resume"
+            >
+              <FileText size={15} />
+              <span>Resume</span>
+              <ArrowUpRight size={14} />
+            </a>
+          )}
+        </div>
+
+        {/* Hero Micro Stats Badges */}
+        <div className="sj-hero-stats-bar">
+          <div className="sj-stat-badge">
+            <Zap size={14} className="sj-stat-icon zap" />
+            <span className="sj-stat-val">390+ DSA</span>
+            <span className="sj-stat-sub">LeetCode &amp; GfG</span>
           </div>
-
-          <div className="sj-console-foot">
-            <div className="sj-console-foot-item">
-              <span className="sj-git-branch-dot" />
-              <span>main*</span>
-            </div>
-            <div className="sj-console-foot-item sj-foot-version">
-              <span>TypeScript 5.4</span>
-            </div>
-            <div className="sj-console-foot-item highlight">
-              <span>Ready 🚀</span>
-            </div>
+          <div className="sj-stat-badge">
+            <Layers size={14} className="sj-stat-icon stack" />
+            <span className="sj-stat-val">MERN &amp; Laravel</span>
+            <span className="sj-stat-sub">Core Stack</span>
+          </div>
+          <div className="sj-stat-badge">
+            <Database size={14} className="sj-stat-icon db" />
+            <span className="sj-stat-val">MySQL &amp; Mongo</span>
+            <span className="sj-stat-sub">Databases</span>
           </div>
         </div>
       </div>
