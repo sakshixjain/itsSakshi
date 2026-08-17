@@ -24,8 +24,8 @@
 
   /* Clean High-Contrast Typography */
   --text-primary: #ffffff;
-  --text-secondary: #e2e8f0;
-  --text-muted: #94a3b8;
+  --text-secondary: #8f97a2;
+  --text-muted: #9aa1aa;
 
   /* Crisp Borders */
   --line: rgba(255, 255, 255, 0.1);
@@ -342,9 +342,9 @@ input:focus-visible {
   margin: 0 auto;
   pointer-events: auto;
   background: rgba(11, 15, 23, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-pill);
-  padding: 6px 12px 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 8px 16px;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.55);
@@ -437,7 +437,7 @@ input:focus-visible {
   font-weight: 500;
   color: var(--text-secondary);
   padding: 6px 14px;
-  border-radius: var(--radius-pill);
+  border-radius: 8px;
   transition: all 0.2s ease;
 }
 
@@ -464,7 +464,7 @@ input:focus-visible {
   font-size: 0.78rem;
   font-weight: 600;
   padding: 7px 16px;
-  border-radius: var(--radius-pill);
+  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -804,7 +804,7 @@ input:focus-visible {
    HERO COMPONENT - MODERN HIGH-CONTRAST DEVELOPER PROFILE
    ========================================================================== */
 .sj-hero {
-  padding: 44px 0 72px;
+  padding: 74px 0 72px;
   display: grid;
   grid-template-columns: 1.18fr 0.82fr;
   gap: 52px;
@@ -954,10 +954,10 @@ input:focus-visible {
 /* Hero Bio Paragraph */
 .sj-hero-bio {
   font-size: 1.04rem;
-  line-height: 1.74;
-  color: #cbd5e1;
-  max-width: 52ch;
-  margin-bottom: 24px;
+  line-height: 1.76;
+  color: var(--text-secondary);
+  max-width: 58ch;
+  margin-bottom: 26px;
   animation: fade-up 0.6s ease 0.2s both;
   text-wrap: pretty;
 }
@@ -1489,7 +1489,7 @@ input:focus-visible {
 }
 
 .sj-about-bio p {
-  font-size: 1.05rem;
+  font-size: 1.03rem;
   color: var(--text-secondary);
   line-height: 1.78;
   margin-bottom: 18px;
@@ -1661,178 +1661,94 @@ input:focus-visible {
   }
 }
 
-.sj-skill-filters {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 36px;
-}
-
-.sj-filter-btn {
-  padding: 9px 22px;
-  border-radius: var(--radius-pill);
-  font-size: 0.86rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(10px);
-  transition: all var(--dur-fast) ease;
-}
-
-.sj-filter-btn:hover {
-  color: #ffffff;
-  background: rgba(51, 65, 85, 0.8);
-  border-color: var(--accent-cyan);
-}
-
-.sj-filter-btn.active {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-  color: #080c14;
-  border-color: transparent;
-  font-weight: 700;
-  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
-}
-
-/* Skill Matrix Grid */
-.sj-skill-groups-matrix {
+/* Skills 4-Card Showcase Grid (Compact & Centered) */
+.sj-skill-showcase-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.sj-skill-matrix-card {
-  background: var(--bg-card);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-lg);
-  padding: 28px 30px;
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(14px);
+.sj-skill-showcase-card {
+  background: rgba(13, 17, 33, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 26px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: transform var(--dur-norm) var(--ease-spring), box-shadow var(--dur-norm) ease, border-color var(--dur-fast) ease;
 }
 
-.sj-skill-matrix-card:hover {
+.sj-skill-showcase-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.55);
-  border-color: var(--accent-cyan);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
 }
 
-.sj-matrix-card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 22px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
+.sj-skill-card-title {
+  font-family: var(--sans);
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
 }
 
-.sj-matrix-head-left {
+/* Centered Flex-Wrap Tech Chips */
+.sj-skill-chips-wrap {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 12px 10px;
+  width: 100%;
 }
 
-.sj-matrix-icon-badge {
-  width: 40px;
-  height: 40px;
+.sj-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--accent-cyan);
+  padding: 8px 16px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.sj-tech-chip:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(56, 189, 248, 0.6);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 14px rgba(56, 189, 248, 0.22);
+}
+
+.sj-tech-chip-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.sj-matrix-card-title {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.sj-matrix-card-sub {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-.sj-matrix-count-badge {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--accent-cyan);
+.sj-tech-chip-text {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #e2e8f0;
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
-/* Skills Chips Grid within Matrix */
-.sj-skills-chips-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.sj-clean-skill-pill {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  transition: all 0.2s ease;
-}
-
-.sj-clean-skill-pill:hover {
-  background: rgba(51, 65, 85, 0.75);
-  border-color: var(--accent-cyan);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-}
-
-.sj-clean-skill-name {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.sj-chip-badge {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: var(--radius-pill);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.sj-chip-badge.expert {
-  background: rgba(16, 185, 129, 0.18);
-  color: var(--accent-primary-light);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-}
-
-.sj-chip-badge.advanced {
-  background: rgba(56, 189, 248, 0.18);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-}
-
-.sj-chip-badge.proficient {
-  background: rgba(129, 140, 248, 0.18);
-  color: #a5b4fc;
-  border: 1px solid rgba(129, 140, 248, 0.4);
-}
-
-@media (max-width: 600px) {
-  .sj-skills-chips-grid {
-    grid-template-columns: 1fr;
-  }
+.sj-tech-chip:hover .sj-tech-chip-text {
+  color: #ffffff;
 }
 
 /* ==========================================================================
@@ -1848,7 +1764,37 @@ input:focus-visible {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  align-items: center;
   margin-bottom: 38px;
+}
+
+.sj-filter-btn {
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.65);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all var(--dur-fast) ease;
+  white-space: nowrap;
+}
+
+.sj-filter-btn:hover {
+  color: #ffffff;
+  background: rgba(51, 65, 85, 0.9);
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+
+.sj-filter-btn.active {
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  color: #080c14;
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
 }
 
 .sj-proj-grid {
@@ -2659,9 +2605,17 @@ input:focus-visible {
   opacity: 0.9;
 }
 
+.sj-edu-paragraph {
+  font-size: 0.93rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  text-wrap: pretty;
+}
+
 .sj-edu-coursework {
   border-top: 1px solid var(--line);
-  padding-top: 16px;
+  padding-top: 14px;
 }
 
 .sj-coursework-label {
@@ -3372,7 +3326,15 @@ input:focus-visible {
   }
 
   .sj-section {
-    padding: 56px 0;
+    padding: 48px 0;
+  }
+
+  .sj-section-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 22px !important;
   }
 
   .sj-section-title {
@@ -3380,15 +3342,15 @@ input:focus-visible {
     line-height: 1.2 !important;
     text-wrap: balance !important;
     word-break: break-word !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 4px !important;
   }
 
   .sj-section-subtitle {
     font-size: 0.94rem !important;
-    line-height: 1.68 !important;
+    line-height: 1.6 !important;
     color: #94a3b8 !important;
     text-wrap: pretty !important;
-    margin-bottom: 28px !important;
+    margin-bottom: 0 !important;
   }
 
   /* 1. HERO ON MOBILE: Clean Hierarchy, Legible Typography, & Zero Overflow */
@@ -3592,41 +3554,34 @@ input:focus-visible {
     display: none !important;
   }
 
-  .sj-skill-filters {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    margin-bottom: 22px !important;
-    width: 100% !important;
-  }
-
-  .sj-filter-btn {
-    padding: 7px 13px !important;
-    font-size: 0.76rem !important;
-  }
-
-  .sj-skill-groups-matrix {
+  .sj-skill-showcase-grid {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    gap: 18px !important;
     width: 100% !important;
   }
 
-  .sj-skill-matrix-card {
+  .sj-skill-showcase-card {
     width: 100% !important;
-    padding: 18px 16px !important;
+    padding: 22px 14px !important;
     box-sizing: border-box !important;
   }
 
-  .sj-skills-chips-grid {
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
-    width: 100% !important;
+  .sj-skill-card-title {
+    font-size: 1.2rem !important;
+    margin-bottom: 18px !important;
   }
 
-  .sj-clean-skill-pill {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 9px 12px !important;
+  .sj-skill-chips-wrap {
+    gap: 8px 6px !important;
+  }
+
+  .sj-tech-chip {
+    padding: 7px 12px !important;
+    gap: 7px !important;
+  }
+
+  .sj-tech-chip-text {
+    font-size: 0.84rem !important;
   }
 
   /* 4. EXPERIENCE ON MOBILE: Clean Card Layout Without Multi-Line Clutter */
@@ -3662,6 +3617,29 @@ input:focus-visible {
   }
 
   /* 4. PROJECTS ON MOBILE */
+  .sj-proj-filters {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 22px !important;
+    width: 100% !important;
+  }
+
+  .sj-filter-btn {
+    padding: 7px 14px !important;
+    font-size: 0.78rem !important;
+    color: #cbd5e1 !important;
+    background: rgba(30, 41, 59, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .sj-filter-btn.active {
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%) !important;
+    color: #080c14 !important;
+    border-color: transparent !important;
+    font-weight: 700 !important;
+  }
+
   .sj-proj-grid {
     grid-template-columns: 1fr !important;
     gap: 20px !important;

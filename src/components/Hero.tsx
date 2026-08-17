@@ -88,9 +88,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Concise Hero Bio */}
+        {/* High-Impact Capability-Driven Hero Bio */}
         <p className="sj-hero-bio">
-          Full-Stack Software Developer building scalable web applications, robust REST APIs, and database-driven solutions with <strong>MERN Stack</strong>, <strong>Laravel</strong>, and <strong>MySQL</strong>.
+          Full-Stack Software Engineer dedicated to turning complex problems into high-performance, production-ready web systems. Driven by strong algorithmic problem-solving (<strong>390+ DSA solved</strong>) and hands-on mastery in <strong>MERN Stack</strong>, <strong>Laravel</strong>, and <strong>MySQL</strong>, I engineer resilient backend architectures, optimized databases, and fluid user experiences built to scale.
         </p>
 
         {/* Primary Call to Action Buttons (Explore Projects & Resume only) */}

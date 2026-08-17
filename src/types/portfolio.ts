@@ -6,7 +6,7 @@ export interface Skill {
 
 export interface SkillGroup {
   title: string;
-  category: "frontend" | "backend" | "database" | "cs";
+  category: "frontend" | "backend" | "android" | "others" | "database" | "cs" | string;
   skills: Skill[];
 }
 
@@ -40,6 +40,7 @@ export interface EducationItem {
   period: string;
   score: string;
   badge?: string;
+  description?: string;
   highlights?: string[];
 }
 

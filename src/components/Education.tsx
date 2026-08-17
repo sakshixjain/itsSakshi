@@ -74,21 +74,11 @@ export default function Education() {
                     </div>
                   </div>
 
-                  {item.highlights && item.highlights.length > 0 && (
-                    <div className="sj-edu-coursework">
-                      <span className="sj-coursework-label">
-                        <BookOpen size={12} />
-                        <span>Core Coursework:</span>
-                      </span>
-                      <div className="sj-coursework-tags">
-                        {item.highlights.map((subject) => (
-                          <span key={subject} className="sj-course-tag">
-                            {subject}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  {item.description && (
+                    <p className="sj-edu-paragraph">{item.description}</p>
                   )}
+
+
                 </div>
               ))}
             </div>
