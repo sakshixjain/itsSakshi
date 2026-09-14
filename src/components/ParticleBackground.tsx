@@ -32,8 +32,8 @@ export default function ParticleBackground() {
 
     window.addEventListener("resize", handleResize);
 
-    // Clean Slate, Emerald, and Sky Cyan palette
-    const palette = ["#10B981", "#38BDF8", "#818CF8", "#F8FAFC", "#94A3B8"];
+    // Minimalist Obsidian, Cobalt, and Slate palette
+    const palette = ["#3B82F6", "#60A5FA", "#93C5FD", "#F8FAFC", "#64748B"];
     const particleCount = Math.min(Math.floor((width * height) / 35000), 45);
     const particles: Particle[] = [];
 

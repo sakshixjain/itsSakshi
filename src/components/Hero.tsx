@@ -17,7 +17,7 @@ const ROLES = [
   "MERN Stack & Laravel Applications",
   "Scalable REST APIs & Web Architecture",
   "Algorithmic Problem Solving (390+ DSA)",
-  "Database Systems (MySQL & MongoDB)",
+  "Database Systems",
 ];
 
 export default function Hero() {
@@ -129,7 +129,7 @@ export default function Hero() {
           </div>
           <div className="sj-stat-badge">
             <Database size={14} className="sj-stat-icon db" />
-            <span className="sj-stat-val">MySQL &amp; Mongo</span>
+            {/* <span className="sj-stat-val">MySQL &amp; Mongo</span> */}
             <span className="sj-stat-sub">Databases</span>
           </div>
         </div>

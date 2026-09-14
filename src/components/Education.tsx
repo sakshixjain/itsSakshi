@@ -8,7 +8,6 @@ import {
   Sparkles,
   Flame,
   CheckCircle2,
-  BookOpen,
   Binary,
 } from "lucide-react";
 

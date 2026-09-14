@@ -31,7 +31,7 @@ export default function Contact() {
       alpha: number;
     }> = [];
 
-    const colors = ["#10B981", "#38BDF8", "#818CF8", "#F8FAFC", "#F59E0B"];
+    const colors = ["#3B82F6", "#60A5FA", "#93C5FD", "#2563EB", "#F8FAFC"];
     for (let i = 0; i < 36; i++) {
       particles.push({
         x: canvas.width / 2,

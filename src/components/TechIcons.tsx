@@ -335,9 +335,9 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
   if (norm.includes("dsa") || norm.includes("algorithm") || norm.includes("data") || norm.includes("cs")) {
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-        <circle cx="12" cy="5" r="3" fill="#10B981" />
-        <circle cx="6" cy="18" r="3" fill="#3B82F6" />
-        <circle cx="18" cy="18" r="3" fill="#EC4899" />
+        <circle cx="12" cy="5" r="3" fill="#3B82F6" />
+        <circle cx="6" cy="18" r="3" fill="#60A5FA" />
+        <circle cx="18" cy="18" r="3" fill="#A855F7" />
         <path d="M12 8v4l-4 3m4-3l4 3" stroke="#CBD5E1" strokeWidth="1.5" />
       </svg>
     );
@@ -366,7 +366,7 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
   if (norm.includes("auth") || norm.includes("jwt") || norm.includes("security")) {
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-        <path d="M12 2L4 5v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V5l-8-3zm0 6a2.5 2.5 0 012.5 2.5c0 1-.6 1.9-1.5 2.3v3.2h-2v-3.2c-.9-.4-1.5-1.3-1.5-2.3A2.5 2.5 0 0112 8z" fill="#EC4899" />
+        <path d="M12 2L4 5v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V5l-8-3zm0 6a2.5 2.5 0 012.5 2.5c0 1-.6 1.9-1.5 2.3v3.2h-2v-3.2c-.9-.4-1.5-1.3-1.5-2.3A2.5 2.5 0 0112 8z" fill="#818CF8" />
       </svg>
     );
   }
@@ -377,7 +377,7 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
         <rect x="3" y="3" width="8" height="8" rx="2" fill="#8B5CF6" />
         <rect x="13" y="3" width="8" height="8" rx="2" fill="#3B82F6" />
-        <rect x="3" y="13" width="8" height="8" rx="2" fill="#10B981" />
+        <rect x="3" y="13" width="8" height="8" rx="2" fill="#0284C7" />
         <rect x="13" y="13" width="8" height="8" rx="2" fill="#F59E0B" />
       </svg>
     );
@@ -387,7 +387,7 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
   if (norm.includes("ai") || norm.includes("gemini")) {
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-        <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#38BDF8" />
+        <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#60A5FA" />
       </svg>
     );
   }
@@ -395,8 +395,8 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
   // Default Fallback
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-      <circle cx="12" cy="12" r="8" stroke="#38BDF8" strokeWidth="2" fill="rgba(56, 189, 248, 0.2)" />
-      <circle cx="12" cy="12" r="3" fill="#38BDF8" />
+      <circle cx="12" cy="12" r="8" stroke="#3B82F6" strokeWidth="2" fill="rgba(59, 130, 246, 0.2)" />
+      <circle cx="12" cy="12" r="3" fill="#60A5FA" />
     </svg>
   );
 }
