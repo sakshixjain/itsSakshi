@@ -7,12 +7,29 @@ import {
   Building2,
   Sparkles,
   Flame,
-  CheckCircle2,
-  Binary,
+  Code2,
+  Network,
+  Layers,
+  BarChart2,
+  BookOpen,
+  Users,
+  ArrowRight,
 } from "lucide-react";
 
 export default function Education() {
   const { ref } = useReveal({ threshold: 0.1 });
+
+  const getCertIcon = (idx: number) => {
+    switch (idx) {
+      case 0:
+        return <Award size={20} />;
+      case 1:
+        return <BarChart2 size={20} />;
+      case 2:
+      default:
+        return <BookOpen size={20} />;
+    }
+  };
 
   return (
     <section id="sj-education" className="sj-section sj-edu-section">
@@ -76,14 +93,12 @@ export default function Education() {
                   {item.description && (
                     <p className="sj-edu-paragraph">{item.description}</p>
                   )}
-
-
                 </div>
               ))}
             </div>
           </div>
 
-          {/* 2. Problem Solving & Certifications Block (Bottom - Animates in from Right) */}
+          {/* 2. Problem Solving & Certifications Block (Matching Reference UI) */}
           <div className="sj-edu-block sj-anim-slide-right">
             <div className="sj-block-heading">
               <div className="sj-col-icon-wrap trophy">
@@ -96,13 +111,13 @@ export default function Education() {
             </div>
 
             <div className="sj-credentials-grid">
-              {/* DSA Problem-Solving Spotlight Hero Box */}
+              {/* DSA Problem-Solving Spotlight Hero Box (Left Column) */}
               <div className="sj-dsa-hero-card">
                 <div className="sj-dsa-top">
                   <div className="sj-dsa-badge-row">
                     <span className="sj-dsa-fire-badge">
                       <Flame size={14} />
-                      Competitive Programming
+                      COMPETITIVE PROGRAMMING
                     </span>
                     <span className="sj-dsa-count">390+ Solved</span>
                   </div>
@@ -113,20 +128,40 @@ export default function Education() {
                   Demonstrated analytical ability with 390+ algorithmic problems solved covering data structures, algorithmic complexity optimization, and dynamic problem solving.
                 </p>
 
-                {/* Progress Breakdown Bars */}
+                {/* 3-Stat Breakdown Boxes */}
                 <div className="sj-dsa-breakdown">
                   <div className="sj-dsa-stat-box">
-                    <span className="sj-dsa-stat-num">140+</span>
-                    <span className="sj-dsa-stat-lbl">Arrays &amp; Strings</span>
+                    <div className="sj-dsa-stat-icon-wrap">
+                      <Code2 size={22} />
+                    </div>
+                    <div className="sj-dsa-stat-info">
+                      <span className="sj-dsa-stat-num">140+</span>
+                      <span className="sj-dsa-stat-lbl">Arrays &amp; Strings</span>
+                    </div>
                   </div>
                   <div className="sj-dsa-stat-box">
-                    <span className="sj-dsa-stat-num">160+</span>
-                    <span className="sj-dsa-stat-lbl">Trees &amp; Graphs</span>
+                    <div className="sj-dsa-stat-icon-wrap">
+                      <Network size={22} />
+                    </div>
+                    <div className="sj-dsa-stat-info">
+                      <span className="sj-dsa-stat-num">160+</span>
+                      <span className="sj-dsa-stat-lbl">Trees &amp; Graphs</span>
+                    </div>
                   </div>
                   <div className="sj-dsa-stat-box">
-                    <span className="sj-dsa-stat-num">90+</span>
-                    <span className="sj-dsa-stat-lbl">DP &amp; Recursion</span>
+                    <div className="sj-dsa-stat-icon-wrap">
+                      <Layers size={22} />
+                    </div>
+                    <div className="sj-dsa-stat-info">
+                      <span className="sj-dsa-stat-num">90+</span>
+                      <span className="sj-dsa-stat-lbl">DP &amp; Recursion</span>
+                    </div>
                   </div>
+                </div>
+
+                {/* Key Topics Section */}
+                <div className="sj-dsa-topics-header">
+                  <span className="sj-dsa-topics-label">KEY TOPICS PRACTICED</span>
                 </div>
 
                 <div className="sj-dsa-topics-grid">
@@ -139,7 +174,7 @@ export default function Education() {
                 </div>
               </div>
 
-              {/* Certifications Cards Column */}
+              {/* Certifications Cards Column (Right Column) */}
               <div className="sj-certs-column">
                 {CERTIFICATIONS.map((cert, cIdx) => (
                   <div
@@ -148,20 +183,29 @@ export default function Education() {
                     style={{ transitionDelay: `${cIdx * 90}ms` }}
                   >
                     <div className="sj-cert-left-icon">
-                      {cert.highlight ? <Award size={18} /> : <CheckCircle2 size={18} />}
+                      {getCertIcon(cIdx)}
                     </div>
 
                     <div className="sj-cert-content">
                       <div className="sj-cert-head-row">
                         <h4 className="sj-cert-name">{cert.title}</h4>
-                        {cert.badge && (
-                          <span className="sj-cert-badge-tag">{cert.badge}</span>
-                        )}
+                        <ArrowRight size={17} className="sj-cert-arrow" />
                       </div>
+
+                      {cert.badge && (
+                        <div className="sj-cert-badge-row">
+                          <span className="sj-cert-badge-tag">{cert.badge}</span>
+                        </div>
+                      )}
+
                       <div className="sj-cert-issuer-row">
-                        <Binary size={13} />
+                        <Users size={14} className="sj-cert-issuer-icon" />
                         <span>{cert.issuer}</span>
                       </div>
+
+                      {cert.description && (
+                        <p className="sj-cert-desc">{cert.description}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -173,3 +217,4 @@ export default function Education() {
     </section>
   );
 }
+

@@ -50,6 +50,7 @@ export interface CertificationItem {
   badge?: string;
   highlight?: boolean;
   link?: string;
+  description?: string;
 }
 
 export interface PersonalInfo {

@@ -8,18 +8,15 @@ interface RevealOptions {
 }
 
 export function useReveal(options: RevealOptions = {}) {
-  const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", delayMs = 0, once = true } = options;
+  const { threshold = 0.05, rootMargin = "50px", delayMs = 0, once = true } = options;
   const ref = useRef<HTMLDivElement | null>(null);
-  const [isVisible, setIsVisible] = useState(() => {
-    if (typeof window !== "undefined" && window.matchMedia) {
-      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }
-    return false;
-  });
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    el.classList.add("in");
 
     // Check if prefers-reduced-motion is active
     const prefersReducedMotion =

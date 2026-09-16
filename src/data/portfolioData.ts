@@ -228,11 +228,11 @@ export const EDUCATION_ITEMS: EducationItem[] = [
     score: "CGPA 8.0 / 10",
     badge: "Graduated with Distinction",
     description:
-      "Completed Bachelor of Technology in Computer Science & Engineering with an 8.0 CGPA. Built a rigorous foundation in core computing disciplines, focusing deeply on Data Structures & Algorithms, Object-Oriented Software Design (OOP), Relational Database Management Systems (MySQL/DBMS), Operating Systems, and full-stack Web Application Development.",
+      "Completed Bachelor of Technology in Computer Science & Engineering with an 8.0 CGPA. Built a rigorous foundation in core computing disciplines, focusing deeply on Data Structures & Algorithms, OOPs, DBMS, Operating Systems, and full-stack Web Application Development.",
     highlights: [
       "Data Structures & Algorithms",
-      "Object-Oriented Programming (OOP)",
-      "Database Management Systems (DBMS & SQL)",
+      " OOPs",
+      " DBMS & SQL",
       "Operating Systems & Computer Networks",
       "Full-Stack Web Technologies",
     ],
@@ -257,20 +257,23 @@ export const EDUCATION_ITEMS: EducationItem[] = [
 export const CERTIFICATIONS: CertificationItem[] = [
   {
     title: "Data Structures & Algorithms and MERN Stack Development",
-    issuer: "Codehelp",
+    issuer: "CodeHelp",
     badge: "Verified Certification",
+    description: "Comprehensive program covering DSA concepts and full stack development.",
     highlight: true,
   },
   {
     title: "390+ Algorithmic Problems Solved",
     issuer: "LeetCode & GeeksforGeeks",
     badge: "DSA Milestone",
+    description: "Consistent practice with a focus on problem solving and optimized solutions.",
     highlight: true,
   },
   {
     title: "Object-Oriented Programming & REST APIs",
     issuer: "Core Computer Science",
     badge: "Architecture",
+    description: "Strong understanding of OOP concepts and experience working with RESTful APIs.",
     highlight: false,
   },
 ];

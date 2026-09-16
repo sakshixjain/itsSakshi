@@ -129,7 +129,7 @@ export default function Hero() {
           </div>
           <div className="sj-stat-badge">
             <Database size={14} className="sj-stat-icon db" />
-            {/* <span className="sj-stat-val">MySQL &amp; Mongo</span> */}
+            <span className="sj-stat-val">MySQL &amp; Mongo</span>
             <span className="sj-stat-sub">Databases</span>
           </div>
         </div>
