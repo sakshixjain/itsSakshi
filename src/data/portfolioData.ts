@@ -80,11 +80,11 @@ export const SKILL_GROUPS: SkillGroup[] = [
     title: "Android",
     category: "android",
     skills: [
+      { name: "Kotlin" },
       { name: "Java" },
-      { name: "Flutter" },
-      { name: "XML" },
       { name: "Android Studio" },
       { name: "React Native" },
+      { name: "XML" },
     ],
   },
   {
@@ -93,12 +93,13 @@ export const SKILL_GROUPS: SkillGroup[] = [
     skills: [
       { name: "Git" },
       { name: "GitHub" },
-      { name: "Docker" },
+      { name: "VS Code" },
+      { name: "Cursor" },
+      { name: "Antigravity" },
+      { name: "Postman" },
       { name: "Vercel" },
       { name: "Netlify" },
-      { name: "VS Code" },
-      { name: "Postman" },
-      { name: "Figma" }
+      { name: "Figma" },
     ],
   },
 ];
@@ -157,7 +158,7 @@ export const PROJECTS: ProjectItem[] = [
     image: "/images/project-edtech.png",
     liveUrl: "https://studynotion-frontend.vercel.app/",
     githubUrl: "https://github.com/sakshixjain",
-    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Razorpay", "Live Site"],
+    tags: ["Node.js", "MongoDB", "Razorpay"],
     featured: true,
   },
   {
@@ -169,7 +170,7 @@ export const PROJECTS: ProjectItem[] = [
     image: "/images/project-crm.png",
     liveUrl: "https://owss.in/",
     githubUrl: "https://github.com/sakshixjain",
-    tags: ["MERN Stack", "MySQL", "TypeScript", "Express", "Node.js", "Live Site"],
+    tags: ["MySQL", "TypeScript", "Node.js"],
     featured: true,
   },
   {
@@ -180,7 +181,7 @@ export const PROJECTS: ProjectItem[] = [
     summary: "Full-scale live NGO management system handling online donation campaigns, volunteer onboarding, event coordination, and automated 80G tax receipts.",
     image: "/images/project-ojeev.png",
     liveUrl: "https://ojeev.org",
-    tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Live Site"],
+    tags: ["Laravel", "PHP", "MySQL"],
     featured: true,
   },
   {
@@ -190,7 +191,7 @@ export const PROJECTS: ProjectItem[] = [
     stack: "MERN Stack · Gemini API · TypeScript",
     summary: "Full-stack AI application generating technical and HR interview questions dynamically via Gemini API, with user data and interview history in MongoDB.",
     image: "/images/project-ai-interview.jpg",
-    tags: ["React", "Gemini API", "Node.js", "Express.js", "MongoDB", "TypeScript"],
+    tags: ["TypeScript", "Node.js", "MongoDB", "Gemini API"],
     githubUrl: "https://github.com/sakshixjain",
     featured: true,
   },
@@ -203,7 +204,7 @@ export const PROJECTS: ProjectItem[] = [
     image: "/images/project-solotrip.png",
     liveUrl: "https://solo-trip.netlify.app/",
     githubUrl: "https://github.com/sakshixjain",
-    tags: ["MERN Stack", "MySQL", "React.js", "Node.js", "Express.js", "Live Site"],
+    tags: ["Next.js", "Typescript", "MySQL"],
     featured: true,
   },
   {
@@ -213,7 +214,7 @@ export const PROJECTS: ProjectItem[] = [
     stack: "MERN Stack · WebSockets · Socket.io",
     summary: "Real-time communication web app built with MERN Stack and WebSockets, supporting secure user authentication and seamless 1-to-1 instant messaging.",
     image: "/images/project-chat.jpg",
-    tags: ["WebSockets", "Socket.io", "React", "Node.js", "MongoDB"],
+    tags: ["Node.js", "MongoDB", "WebSockets"],
     githubUrl: "https://github.com/sakshixjain",
     featured: false,
   },

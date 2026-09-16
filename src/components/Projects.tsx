@@ -5,29 +5,9 @@ import {
   ArrowUpRight,
   Sparkles,
   Image as ImageIcon,
-  ExternalLink,
 } from "lucide-react";
 
 type ProjectCategory = "all" | "fullstack" | "mobile" | "realtime";
-
-function GithubIcon({ size = 14 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-      <path d="M9 18c-4.51 2-5-2-7-2" />
-    </svg>
-  );
-}
 
 export default function Projects() {
   const { ref } = useReveal({ threshold: 0.1 });
@@ -90,6 +70,7 @@ export default function Projects() {
         <div className="sj-proj-grid">
           {filteredProjects.map((proj, pIdx) => {
             const hasValidImage = proj.image && !failedImages[proj.id];
+            const targetUrl = proj.liveUrl || proj.githubUrl;
 
             return (
               <article
@@ -97,7 +78,7 @@ export default function Projects() {
                 className="sj-proj-card"
                 style={{ transitionDelay: `${pIdx * 80}ms` }}
               >
-                {/* Project Image Banner */}
+                {/* Project Image Screen Banner with Hover Blur & Centered Button */}
                 <div className="sj-proj-img-wrap">
                   {hasValidImage ? (
                     <img
@@ -117,65 +98,49 @@ export default function Projects() {
                     </div>
                   )}
 
-                  <div className="sj-proj-badges-row">
-
-                    {proj.featured && (
+                  {proj.featured && (
+                    <div className="sj-proj-badges-row">
                       <span className="sj-featured-badge">
                         <Sparkles size={11} />
                         Featured
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
+
+                  {/* Centered Hover Overlay with Blur and Live Demo Button */}
+                  {targetUrl && (
+                    <div className="sj-proj-hover-overlay">
+                      <a
+                        href={targetUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="sj-proj-center-btn"
+                        aria-label={`Live Demo of ${proj.title}`}
+                      >
+                        <span>Live Demo</span>
+                        <ArrowUpRight size={16} />
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Body */}
                 <div className="sj-proj-card-body">
-                  <div className="sj-proj-card-top">
-                    {/* <span className="sj-proj-stack-label">{proj.stack}</span> */}
-                    <h3 className="sj-proj-card-title">{proj.title}</h3>
-                    <p className="sj-proj-summary-text">{proj.summary}</p>
+                  {/* Tools / Languages Tags above Title */}
+                  <div className="sj-proj-tags-list">
+                    {proj.tags.map((tag) => (
+                      <span key={tag} className="sj-proj-tag-pill">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
-                  <div className="sj-proj-card-bottom">
-                    {/* Tags List */}
-                    <div className="sj-proj-tags-list">
-                      {proj.tags.map((tag) => (
-                        <span key={tag} className="sj-proj-tag-pill">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="sj-proj-card-top">
+                    {/* Project Title */}
+                    <h3 className="sj-proj-card-title">{proj.title}</h3>
 
-                    {/* Actions */}
-                    <div className="sj-proj-actions">
-                      {proj.liveUrl && (
-                        <a
-                          href={proj.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="sj-proj-btn-live"
-                          aria-label={`Visit ${proj.title} live website`}
-                        >
-                          <ExternalLink size={13} />
-                          <span>Live Site</span>
-                          <ArrowUpRight size={13} />
-                        </a>
-                      )}
-
-                      {proj.githubUrl && (
-                        <a
-                          href={proj.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="sj-proj-btn-code"
-                          aria-label={`View ${proj.title} on GitHub`}
-                        >
-                          <GithubIcon size={14} />
-                          <span>GitHub</span>
-                          <ArrowUpRight size={13} />
-                        </a>
-                      )}
-                    </div>
+                    {/* Project Summary Description */}
+                    <p className="sj-proj-summary-text">{proj.summary}</p>
                   </div>
                 </div>
               </article>

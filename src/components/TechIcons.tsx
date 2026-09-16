@@ -240,6 +240,69 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
     );
   }
 
+  // Android Studio / Android
+  if (norm.includes("studio")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <rect width="24" height="24" rx="5" fill="#3DDC84" />
+        <path d="M7 17l5-10 5 10H7zm5-3.5l1.6-3.2h-3.2L12 13.5z" fill="#073042" />
+      </svg>
+    );
+  }
+
+  // Kotlin
+  if (norm.includes("kotlin")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <path d="M22 2H2v20h20L12 12 22 2z" fill="url(#kotlin-grad)" />
+        <path d="M12 12L2 22V2l10 10z" fill="url(#kotlin-grad-2)" />
+        <defs>
+          <linearGradient id="kotlin-grad" x1="22" y1="2" x2="2" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#E4485D" />
+            <stop offset="50%" stopColor="#C711E1" />
+            <stop offset="100%" stopColor="#7F52FF" />
+          </linearGradient>
+          <linearGradient id="kotlin-grad-2" x1="2" y1="2" x2="12" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#0095D5" />
+            <stop offset="100%" stopColor="#7F52FF" />
+          </linearGradient>
+        </defs>
+      </svg>
+    );
+  }
+
+  // XML
+  if (norm.includes("xml")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <rect width="24" height="24" rx="4" fill="#E44D26" />
+        <text x="3.5" y="16" fill="#FFFFFF" fontSize="8" fontWeight="bold" fontFamily="monospace">&lt;/&gt;</text>
+      </svg>
+    );
+  }
+
+  // Cursor AI
+  if (norm.includes("cursor")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <rect width="24" height="24" rx="5" fill="#18181B" stroke="#38BDF8" strokeWidth="0.8" />
+        <path d="M6 5l12 7-6.5 1.5-1.5 6.5L6 5z" fill="#38BDF8" />
+      </svg>
+    );
+  }
+
+  // Antigravity AI
+  if (norm.includes("antigravity")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <circle cx="12" cy="12" r="10" fill="#0B0F19" stroke="#818CF8" strokeWidth="1.2" />
+        <path d="M12 4.5l5 9H7l5-9z" stroke="#38BDF8" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(56, 189, 248, 0.15)" />
+        <circle cx="12" cy="11" r="2.2" fill="#A855F7" />
+        <path d="M8 17.5h8" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
   // Android
   if (norm.includes("android")) {
     return (
@@ -289,6 +352,29 @@ export function TechIcon({ name, size = 18, className = "" }: TechIconProps): JS
         <rect x="10" y="11" width="1.5" height="1.5" fill="#FFFFFF" />
         <rect x="7.5" y="8.5" width="1.5" height="1.5" fill="#FFFFFF" />
         <rect x="10" y="8.5" width="1.5" height="1.5" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // Figma
+  if (norm.includes("figma")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <path d="M8 12a4 4 0 118 0 4 4 0 01-8 0z" fill="#1ABCFE" />
+        <path d="M12 2a4 4 0 00-4 4 4 4 0 004 4h4V2h-4z" fill="#F24E1E" />
+        <path d="M8 6a4 4 0 014-4v8H8a4 4 0 010-8z" fill="#FF7262" />
+        <path d="M8 18a4 4 0 014-4v4a4 4 0 01-4 4 4 4 0 01-4-4 4 4 0 014-4z" fill="#0ACF83" />
+        <path d="M16 10a4 4 0 00-4-4v8h4a4 4 0 000-8z" fill="#A259FF" />
+      </svg>
+    );
+  }
+
+  // Netlify
+  if (norm.includes("netlify")) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+        <path d="M12 2L3.5 12l8.5 10 8.5-10L12 2z" fill="#00C7B7" />
+        <path d="M12 6.5l-4.5 5.5 4.5 5.5 4.5-5.5-4.5-5.5z" fill="#FFFFFF" />
       </svg>
     );
   }
